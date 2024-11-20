@@ -1,11 +1,12 @@
 import Image from "next/image";
+import AsymmetricalGallery from "./_componnents/AsymmetricalGallery";
 
 export default function Home() {
   return (
     <>
       <div>
-        <h1 className="text-4xl font-bold">Maxime.C</h1>
-        <p>Programmeur, Modélisateur et Concepteur Visuel</p>
+        <img src="Header.png" alt="big image" />
+        <AsymmetricalGallery />
       </div>
     </>
   );

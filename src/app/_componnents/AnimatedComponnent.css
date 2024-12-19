@@ -1,0 +1,59 @@
+.animation-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #add8e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.rotating-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%; /* Adjust for the rotating size */
+  height: 150%; /* Ensure it covers the area */
+  background-color: #89c9e2;
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.image-container {
+  position: relative;
+  z-index: 1; /* Keeps it on top of the rotating background */
+}
+
+.centerpiece {
+  width: 250px; /* Adjust size as needed */
+  height: auto;
+}
+
+.animated-text {
+  position: absolute;
+  bottom: 10%;
+  font-family: 'Arial', sans-serif;
+  font-size: 3rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

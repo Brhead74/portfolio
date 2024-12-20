@@ -33,16 +33,17 @@ const AsymmetricalGallery = () => {
   return (
     <div id="Gallery" className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 md:text-3xl">Mes Projets</h1>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 p-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 p-4">
         {images.map((image, index) => (
           <div
             key={index}
-            className={`relative overflow-hidden rounded-lg ${index === 0
-                ? "md:col-span-2 md:row-span-2"
+            className={`relative overflow-hidden rounded-lg ${
+              index === 0
+                ? "md:col-span-2 md:row-span-2 xl:col-span-2" // larger span on xl screens
                 : index === 2
-                  ? "md:row-span-2"
-                  : "md:col-span-1"
-              }`}
+                ? "md:row-span-2"
+                : "md:col-span-1"
+            }`}
           >
             <img
               src={image.src}

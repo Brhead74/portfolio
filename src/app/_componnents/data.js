@@ -1,7 +1,6 @@
 export const data = [
     { src: "GOat.png", details: "Projet d'équipe Jeu 5 // Unity", titre: "Yokai Rush" },
     { src: "Astronaut.png", details: "Modélisation et texturation // Blender", titre: "P'tit Astronaute" },
-    { src: "CvVideo.png", details: "Présentation Professionelle // After Effects", titre: "CV Vidéo" },
-    { src: "image4.jpg", details: "This is project 4 details.", titre: "Project 4" },
-    { src: "image5.jpg", details: "This is project 5 details.", titre: "Project 5" },
+    { src: "horror_vr.png", details: "Création de scène et VFX // Unity Vr", titre: "Scène Glauque" },
+    { src: "factquest.png", details: "https://web5-synthese-nine.vercel.app/quiz", titre: "FactQuest"},
 ]

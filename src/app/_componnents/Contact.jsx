@@ -18,10 +18,16 @@ const Contact = () => {
             className='bg-white text-cyan-400 px-8 py-3 text-lg md:text-2xl font-semibold rounded-md shadow-lg hover:bg-cyan-500 hover:text-white transition-colors duration-300'>
             Contactez-moi
           </button>
+          <br />
+          <button 
+            onClick={() => window.open('maxconst_Cv.pdf', '_blank')}
+            className='underline text-lg mt-4 hover:text-cyan-500'>
+            Télécharger mon CV
+          </button>
         </div>
 
         <div className='mt-8 md:mt-0 md:w-1/2'>
-          <img src="contact.png" alt="contact illustration" className='w-full md:w-3/4 mx-auto' />
+          <img src="contact.png" alt="contact illustration" className='w-full md:w-3/4 mx-auto hover:opacity-80 transition-opacity duration-300' />
         </div>
       </div>
     </div>

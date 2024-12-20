@@ -30,21 +30,18 @@ const HeaderMenu = () => {
 
         <nav className="menu-content">
           <div className="main-links">
-            <h3>Main Links</h3>
+            <h1>Main Links</h1>
             <ul>
-              <li><a href="#home">Home</a></li>
+              <li><a href="#home">Acueil</a></li>
               <li><a href="#work">Work</a></li>
-              <li><a href="#shop">Shop</a></li>
-              <li><a href="#contact" className="highlight">Contact</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
           <div className="social-links">
-            <h3>View My Other Socials</h3>
+            <h1>Mes réseaux sociaux</h1>
             <ul>
-              <li><a href="#stuff-i-use">Stuff I Use</a></li>
-              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
-              <li><a href="https://artstation.com" target="_blank" rel="noopener noreferrer">Art Station</a></li>
+              <li><a href="www.instagram.com/half_alive_artist/">Instagram</a></li>
+              <li><a href="www.linkedin.com/in/max-const">Linkedin</a></li>
             </ul>
           </div>
         </nav>

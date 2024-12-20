@@ -5,8 +5,8 @@ import Contact from "./_componnents/Contact";
 export default function Home() {
   return (
     <>
-      <div>
-        <img src="Header.png" alt="big image" className="mb-12"/>
+      <div className="w-full">
+        <img src="Header.png" alt="big image" className="mb-12 w-full"/>
         
         <AsymmetricalGallery />
 

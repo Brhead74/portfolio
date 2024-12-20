@@ -13,7 +13,7 @@ const HeaderMenu = () => {
     <header>
       {/* Top Bar */}
       <div className="top-bar">
-        <h1 className="site-title">{headerTitle}</h1>
+        <h1 className="site-title ">{headerTitle}</h1>
         <div className="hamburger-menu" onClick={toggleMenu} aria-label="Toggle Menu">
           <span className="bar"></span>
           <span className="bar"></span>

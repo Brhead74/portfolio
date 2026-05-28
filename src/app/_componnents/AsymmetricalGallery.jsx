@@ -31,32 +31,39 @@ const AsymmetricalGallery = () => {
   }, [isModalOpen]);
 
   return (
-    <div id="Gallery" className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4 md:text-3xl">Mes Projets</h1>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 p-4">
+    <section id="work" className="mx-auto max-w-7xl px-0 py-6 sm:py-10">
+      <div className="mb-5 flex flex-col gap-3 px-2 sm:mb-6 sm:px-0">
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-[var(--muted)] sm:text-xs">Selected work</p>
+        <h2 className="text-[1.6rem] font-black tracking-tight text-[var(--foreground)] sm:text-3xl">Mes projets</h2>
+        <p className="max-w-2xl text-sm leading-6 text-[var(--muted)] sm:text-base">
+          Une sélection courte et lisible de travaux 2D, 3D, jeu et interface. Chaque carte reste simple, mais met en avant le contenu.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {images.map((image, index) => (
           <div
             key={index}
-            className={`relative overflow-hidden rounded-lg ${
+            className={`group relative overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-white shadow-[0_16px_60px_rgba(15,23,42,0.08)] ${
               index === 0
-                ? "md:col-span-2 md:row-span-2 xl:col-span-2" // larger span on xl screens
+                ? "sm:col-span-2 lg:col-span-2 lg:row-span-2"
                 : index === 2
-                ? "md:row-span-2"
-                : "md:col-span-1"
+                ? "sm:row-span-2"
+                : ""
             }`}
           >
             <img
               src={image.src}
               alt={image.titre || `Gallery Item ${index + 1}`}
               loading="lazy"
-              className="w-full h-48 md:h-full object-cover cursor-pointer transition-transform hover:scale-110"
+              className="h-56 w-full cursor-pointer object-cover transition duration-500 group-hover:scale-[1.04] sm:h-64 lg:h-full"
               onClick={() => handleImageClick(image)}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-20 pointer-events-none"></div>
-            <h2 className="absolute bottom-8 left-4 text-sm md:text-lg font-bold text-white">
-              {image.titre || "Untitled"}
-            </h2>
-            <p className="absolute bottom-4 left-4 text-xs md:text-sm text-white">{image.details}</p>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/18 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
+              <h3 className="text-base font-bold sm:text-lg">{image.titre || "Untitled"}</h3>
+              <p className="mt-1 text-sm text-white/80">{image.details}</p>
+            </div>
           </div>
         ))}
 
@@ -65,7 +72,7 @@ const AsymmetricalGallery = () => {
           <Modal selectedImage={selectedImage} closeModal={closeModal} />
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,36 +1,36 @@
-"use client"
-import React from 'react';
-
 const Contact = () => {
   return (
-    <div className='bg-cyan-400 px-12 py-12 md:px-24 md:py-20 text-white'>
-      <div className='flex flex-col md:flex-row items-center justify-between'>
-        <div className='text-center md:text-left md:w-1/2'>
-          <h1 className='text-4xl md:text-6xl font-bold mb-2'>Maxime Constantineau</h1>
-          <p className='text-xl md:text-2xl mb-8'>Programmeur, Modélisateur et Concepteur Visuel</p>
+    <section
+      id="contact"
+      className="mx-auto mt-10 max-w-7xl rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] px-4 py-8 shadow-[0_18px_70px_rgba(15,23,42,0.08)] sm:px-8 lg:px-10 lg:py-10"
+    >
+      <div className='grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center'>
+        <div className='space-y-4 text-center lg:text-left'>
+          <p className='text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-[var(--muted)] sm:text-xs'>Contact</p>
+          <h2 className='text-[1.9rem] font-black tracking-tight text-[var(--foreground)] sm:text-4xl'>Travaillons sur quelque chose de clair et utile.</h2>
+          <p className='mx-auto max-w-xl text-sm leading-7 text-[var(--muted)] sm:text-base lg:mx-0'>Créateur multimédia, je peux aider sur du design, du jeu vidéo, du visuel 3D ou des interfaces simples à comprendre.</p>
 
-          <p className='text-lg mb-4'>Créateur multimédia avec trop de passions.</p>
-
-          <p className='text-lg mb-6'>Je suis disponible pour des collaborations et des projets.</p>
-
-          <button 
-            onClick={() => window.location.href = 'mailto:Bhread74@gmail.com'}
-            className='bg-white text-cyan-400 px-8 py-3 text-lg md:text-2xl font-semibold rounded-md shadow-lg hover:bg-cyan-500 hover:text-white transition-colors duration-300'>
-            Contactez-moi
-          </button>
-          <br />
-          <button 
-            onClick={() => window.open('maxconst_Cv.pdf', '_blank')}
-            className='underline text-lg mt-4 hover:text-cyan-500'>
-            Télécharger mon CV
-          </button>
+          <div className='flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start'>
+            <a 
+              href='mailto:Bhread74@gmail.com'
+              className='inline-flex w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-black sm:w-auto'>
+              Contactez-moi
+            </a>
+            <a 
+              href='maxconst_Cv.pdf'
+              target='_blank'
+              rel='noreferrer'
+              className='inline-flex w-full items-center justify-center rounded-full border border-[var(--border)] bg-white px-6 py-3 text-sm font-semibold text-[var(--foreground)] shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:bg-slate-50 sm:w-auto'>
+              Télécharger mon CV
+            </a>
+          </div>
         </div>
 
-        <div className='mt-8 md:mt-0 md:w-1/2'>
-          <img src="contact.png" alt="contact illustration" className='w-full md:w-3/4 mx-auto hover:opacity-80 transition-opacity duration-300' />
+        <div className='overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-white shadow-sm'>
+          <img src="contact.png" alt="Illustration de contact" className='h-full w-full object-cover' />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

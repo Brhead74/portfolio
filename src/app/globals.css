@@ -11,6 +11,19 @@
   --border: rgba(16, 24, 40, 0.08);
   --accent: #0ea5e9;
   --accent-strong: #0284c7;
+  /* design tokens for consistent styling */
+  --radius-sm: 0.5rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 6px 18px rgba(15,23,42,0.06);
+  --shadow-medium: 0 14px 34px rgba(15,23,42,0.08);
+  --shadow-strong: 0 24px 80px rgba(15,23,42,0.12);
+  --shadow-xstrong: 0 30px 80px rgba(15,23,42,0.22);
+
+  --btn-padding-vertical: 0.95rem;
+  --btn-padding-horizontal: 1.2rem;
 }
 
 * {

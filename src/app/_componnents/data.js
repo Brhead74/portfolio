@@ -22,6 +22,7 @@ export const data = [
     },
     {
         src: "horror_vr.png",
+        src2: ["glauque1.mp4", "glauque2.mp4"],
         titre: "Scène Glauque",
         details: "Création de scène et effets visuels pour une ambiance VR.",
         stack: ["Unity VR", "VFX"],

@@ -11,7 +11,7 @@
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border);
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-medium);
 }
 
 .brand-block {
@@ -22,19 +22,29 @@
   min-width: 0;
 }
 
+/* brand-logo removed — title now uses site font */
+
+
 .site-title {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-family: "Luckiest Guy", cursive;
-  font-size: clamp(1.65rem, 2vw, 2.2rem);
-  font-weight: 400;
+  text-decoration: none;
+}
+
+.site-title-text {
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-size: clamp(1.125rem, 2.2vw, 1.6rem);
+  font-weight: 700;
   line-height: 1;
   color: var(--foreground);
   margin: 0;
-  text-decoration: none;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  display: inline-block;
+  transition: transform 120ms ease, color 120ms ease;
 }
+
+.site-title:hover .site-title-text { transform: translateY(-1px); color: var(--accent-strong); }
 
 .site-title:hover {
   color: #0f172a;
@@ -75,13 +85,14 @@
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 600;
-  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+  position: relative;
 }
 
 .desktop-nav a:hover {
-  transform: translateY(-1px);
-  border-color: var(--border);
-  background: #f8fafc;
+  transform: translateY(-2px);
+  border-color: rgba(15,23,42,0.04);
+  background: linear-gradient(180deg, rgba(248,250,252,0.6), rgba(248,250,252,0.9));
 }
 
 .desktop-nav a span {
@@ -89,6 +100,33 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
+}
+
+/* Animated underline */
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 8px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0;
+  transform: scaleX(0.4);
+  transition: opacity 160ms ease, transform 200ms ease;
+}
+
+.desktop-nav a:hover::after,
+.desktop-nav a:focus::after,
+.desktop-nav a[aria-current="page"]::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Focus styles for keyboard users */
+.desktop-nav a:focus {
+  outline: none;
+  box-shadow: 0 6px 18px rgba(124,58,237,0.08);
 }
 
 .hamburger-menu {
@@ -102,9 +140,9 @@
   width: 3rem;
   height: 3rem;
   padding: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-soft);
 }
 
 .hamburger-menu .bar {
@@ -145,9 +183,9 @@
   width: min(100%, 52rem);
   padding: 1.25rem;
   border: 1px solid var(--border);
-  border-radius: 1.5rem;
+  border-radius: var(--radius-lg);
   background: #ffffff;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+  box-shadow: var(--shadow-strong);
 }
 
 .menu-header {
@@ -179,7 +217,7 @@
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background-color: #f8fafc;
   border: 1px solid var(--border);
   font-size: 2.5rem;
@@ -202,7 +240,7 @@
 
 .menu-column {
   padding: 1.25rem;
-  border-radius: 1.5rem;
+  border-radius: var(--radius-md);
   background: #f8fafc;
   border: 1px solid var(--border);
 }
@@ -320,9 +358,9 @@
     padding: 1rem 1.35rem;
   }
 
-  .menu-shell {
-    padding: 2rem;
-    border-radius: 2rem;
+    .menu-shell {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
   }
 
   .menu-content {

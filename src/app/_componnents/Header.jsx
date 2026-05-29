@@ -14,7 +14,7 @@ const HeaderMenu = () => {
       <div className="top-bar">
         <div className="brand-block">
           <a className="site-title" href="#home">
-            {headerTitle}
+            <span className="site-title-text">{headerTitle}</span>
           </a>
           <span className="site-kicker">portfolio créatif</span>
         </div>

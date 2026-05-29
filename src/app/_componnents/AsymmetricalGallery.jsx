@@ -94,63 +94,91 @@ const AsymmetricalGallery = () => {
         </p>
       </div>
 
-      <div className="gallery-grid carousel-mode">
-        <Carousel images={images} onItemClick={handleImageClick} />
-      </div>
+      <div className="gallery-grid focused-primary">
+        {(() => {
+          if (!images || images.length === 0) return null;
 
-        {/* Modal */}
-        {isModalOpen && (
-          <Modal selectedImage={selectedImage} closeModal={closeModal} />
-        )}
+          const primary = images[0];
+          const others = images.slice(1);
+
+          return (
+            <>
+              <div className="gallery-primary" style={{ ['--delay']: `0ms` }}>
+                <div className={`gallery-card gallery-card-large ${((primary.src && primary.src.toLowerCase().includes('horror')) || (primary.titre && primary.titre.toLowerCase().includes('glauque'))) ? 'saturated-card' : ''}`}>
+                  <button
+                    type="button"
+                    className="gallery-card-button"
+                    onClick={() => handleImageClick(primary)}
+                    aria-label={`Open project ${primary.titre || 'featured project'}`}
+                  >
+                    {(() => {
+                      const isHorror = (primary.src && primary.src.toLowerCase().includes('horror')) || (primary.titre && primary.titre.toLowerCase().includes('glauque'));
+                      return <MediaPreview source={primary.src} alt={primary.titre} className={`gallery-image ${isHorror ? 'saturated' : ''}`} />;
+                    })()}
+                    {videoPattern.test(primary.src) && (
+                      <span className="gallery-play" aria-hidden>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.35)" />
+                          <path d="M10 8.5v7l6-3.5-6-3.5z" fill="#fff" />
+                        </svg>
+                      </span>
+                    )}
+                    <div className="gallery-overlay" />
+                    <div className="gallery-caption">
+                      <h3 className="gallery-card-title">{primary.titre || "Untitled"}</h3>
+                      <p className="gallery-card-details">{primary.details}</p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <div className="gallery-tiles">
+                {others.map((image, idx) => (
+                  <div
+                    className={`gallery-card tile ${((image.src && image.src.toLowerCase().includes('horror')) || (image.titre && image.titre.toLowerCase().includes('glauque'))) ? 'saturated-card' : ''}`}
+                    key={`tile-${idx}`}
+                    style={{ ['--delay']: `${(idx + 1) * 40}ms` }}
+                  >
+                    <button
+                      type="button"
+                      className="gallery-card-button"
+                      onClick={() => handleImageClick(image)}
+                      aria-label={`Open project ${image.titre || ('project ' + (idx + 2))}`}
+                    >
+                      <MediaPreview
+                        source={image.src}
+                        alt={image.titre}
+                        className={`gallery-image ${((image.src && image.src.toLowerCase().includes('horror')) || (image.titre && image.titre.toLowerCase().includes('glauque'))) ? 'saturated' : ''}`}
+                      />
+                      {videoPattern.test(image.src) && (
+                        <span className="gallery-play" aria-hidden>
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.28)" />
+                            <path d="M10 8.5v7l6-3.5-6-3.5z" fill="#fff" />
+                          </svg>
+                        </span>
+                      )}
+                      <div className="gallery-overlay" />
+                      <div className="gallery-caption">
+                        <h3 className="gallery-card-title">{image.titre || "Untitled"}</h3>
+                        <p className="gallery-card-details">{image.details}</p>
+                      </div>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          );
+        })()}
+
+      {/* Modal */}
+      {isModalOpen && (
+        <Modal selectedImage={selectedImage} closeModal={closeModal} />
+      )}
       </div>
     </section>
   );
 };
 
+
 export default AsymmetricalGallery;
-
-// Simple horizontal carousel component using scroll-snap
-function Carousel({ images, onItemClick }) {
-  const trackRef = React.createRef();
-
-  const scrollByAmount = (dir = 1) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const amount = Math.round(track.clientWidth * 0.8) * dir;
-    track.scrollBy({ left: amount, behavior: 'smooth' });
-  };
-
-  const handleKey = (e) => {
-    if (e.key === 'ArrowRight') scrollByAmount(1);
-    if (e.key === 'ArrowLeft') scrollByAmount(-1);
-  };
-
-  return (
-    <div className="carousel" onKeyDown={handleKey}>
-      <button className="carousel-btn prev" onClick={() => scrollByAmount(-1)} aria-label="Previous">‹</button>
-      <div className="carousel-track" ref={trackRef} tabIndex={0} role="list">
-        {images.map((image, idx) => (
-          <div className="carousel-item" role="listitem" key={`c-${idx}`}>
-            <button type="button" className="gallery-card-button" onClick={() => onItemClick(image)} aria-label={`Open project ${image.titre || idx}`}>
-              <MediaPreview source={image.src} alt={image.titre} className="gallery-image" />
-              {videoPattern.test(image.src) && (
-                <span className="gallery-play" aria-hidden>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.28)" />
-                    <path d="M10 8.5v7l6-3.5-6-3.5z" fill="#fff" />
-                  </svg>
-                </span>
-              )}
-              <div className="gallery-overlay" />
-              <div className="gallery-caption">
-                <h3 className="gallery-card-title">{image.titre || "Untitled"}</h3>
-                <p className="gallery-card-details">{image.details}</p>
-              </div>
-            </button>
-          </div>
-        ))}
-      </div>
-      <button className="carousel-btn next" onClick={() => scrollByAmount(1)} aria-label="Next">›</button>
-    </div>
-  );
-}

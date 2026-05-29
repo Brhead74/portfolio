@@ -61,12 +61,50 @@
   border-radius: 1.25rem;
   background: #fff;
 }
+.project-modal-image-wrap {
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: #fff;
+  aspect-ratio: 16 / 9;
+}
 
 .project-modal-image {
   display: block;
   width: 100%;
-  height: 44vh;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-modal-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  align-items: center;
+}
+
+.project-modal-thumb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+.project-modal-thumb-media {
+  display: block;
+  width: 5.25rem;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.project-modal-thumb-selected {
+  border-color: var(--accent);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
 }
 
 .project-modal-content {
@@ -195,8 +233,9 @@
 }
 
 @media (min-width: 768px) {
-  .project-modal-image {
-    height: 52vh;
+  .project-modal-image-wrap {
+    /* keep 16:9 but allow larger container on wider screens */
+    max-height: 52vh;
   }
 
   .project-modal-content {
@@ -214,7 +253,7 @@
   }
 
   .project-modal-image {
-    height: 68vh;
+    /* when panel is large, allow image wrap to grow while preserving 16:9 */
   }
 
   .project-modal-content {

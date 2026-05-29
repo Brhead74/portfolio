@@ -1,8 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Modal.css";
 
+const videoPattern = /\.(mp4|webm|ogg)(\?.*)?$/i;
+
+const isVideoSource = (source) => videoPattern.test(source || "");
+
+const normalizeSources = (source) => {
+  if (!source) return [];
+  return Array.isArray(source) ? source : [source];
+};
+
+const renderMedia = (source, alt, className) => {
+  if (!source) return null;
+
+  if (isVideoSource(source)) {
+    return (
+      <video
+        src={source}
+        className={className}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-label={alt}
+        title={alt}
+      />
+    );
+  }
+
+  return <img src={source} alt={alt} className={className} />;
+};
+
 const Modal = ({ selectedImage, closeModal }) => {
-  // Return null if no image is selected
+  const primarySource = selectedImage
+    ? selectedImage.src || normalizeSources(selectedImage.src2 || selectedImage.other)[0] || ""
+    : "";
+
+  const mediaSources = selectedImage
+    ? [selectedImage.src, ...normalizeSources(selectedImage.src2 || selectedImage.other)].filter(Boolean)
+    : [];
+
+  const [mainSrc, setMainSrc] = useState(primarySource);
+
+  useEffect(() => {
+    setMainSrc(primarySource);
+  }, [primarySource]);
+
   if (!selectedImage) return null;
 
   return (
@@ -29,12 +73,30 @@ const Modal = ({ selectedImage, closeModal }) => {
         <div className="project-modal-layout">
           <div className="project-modal-image-shell">
             <div className="project-modal-image-wrap">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.titre || "Modal Image"}
-                className="project-modal-image"
-              />
+              {renderMedia(
+                mainSrc,
+                selectedImage.titre || "Modal Image",
+                "project-modal-image"
+              )}
             </div>
+
+            {mediaSources.length > 1 && (
+              <div className="project-modal-thumbs" role="list">
+                {mediaSources.map((source) => (
+                  <button
+                    key={source}
+                    type="button"
+                    role="listitem"
+                    className={`project-modal-thumb ${source === mainSrc ? "project-modal-thumb-selected" : ""}`}
+                    onClick={() => setMainSrc(source)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setMainSrc(source); }}
+                    aria-pressed={source === mainSrc}
+                  >
+                    {renderMedia(source, `Preview ${source}`, "project-modal-thumb-media")}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="project-modal-content">

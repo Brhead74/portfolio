@@ -31,10 +31,10 @@ export default function Home() {
           </div>
 
           <div className="hero-tags">
-            <span className="hero-tag">UI simple</span>
-            <span className="hero-tag">Animation</span>
-            <span className="hero-tag">Jeu vidéo</span>
             <span className="hero-tag">3D / VFX</span>
+            <span className="hero-tag">Jeu vidéo</span>
+            <span className="hero-tag">Expérimentation</span>
+            <span className="hero-tag">Animation</span>
           </div>
         </div>
 

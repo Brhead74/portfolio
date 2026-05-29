@@ -10,11 +10,11 @@ const Contact = () => {
           <p className="contact-description">Créateur multimédia, je peux aider sur du design, du jeu vidéo, du visuel 3D ou des interfaces simples à comprendre.</p>
 
           <div className="contact-actions">
-            <a href='mailto:Bhread74@gmail.com' className="button button-primary">
+            <a href='mailto:constantineau.max@gmail.com' className="button button-primary">
               Contactez-moi
             </a>
             <a
-              href='maxconst_Cv.pdf'
+              href='maxconst_cv.pdf'
               target='_blank'
               rel='noreferrer'
               className="button button-secondary">

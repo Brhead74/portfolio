@@ -47,12 +47,21 @@ const Modal = ({ selectedImage, closeModal }) => {
     setMainSrc(primarySource);
   }, [primarySource]);
 
+  // close on Escape locally (more reliable across breakpoints)
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') closeModal(); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [closeModal]);
+
   if (!selectedImage) return null;
 
   return (
     <div
       className="project-modal"
       onClick={closeModal}
+      onPointerDown={closeModal}
+      onTouchStart={closeModal}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
@@ -61,6 +70,8 @@ const Modal = ({ selectedImage, closeModal }) => {
       <div
         className="project-modal-panel"
         onClick={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
       >
         <button
           className="project-modal-close"

@@ -53,7 +53,20 @@ export default function Home() {
         </div>
       </section>
 
-      <AsymmetricalGallery />
+      <div className="gallery-intro">
+        <p className="gallery-kicker">Selected work</p>
+        <h2 className="gallery-title">Mes projets</h2>
+        <p className="gallery-description">
+          Une sélection courte et lisible de travaux 2D, 3D, jeu et interface. Chaque carte reste simple, mais met en avant le contenu.
+        </p>
+      </div>
+      <AsymmetricalGallery limit={5} />
+
+      <div style={{ padding: '0 1rem', marginTop: '0.75rem', display: 'flex', justifyContent: 'center' }}>
+        <a href="/projects" className="button button-primary">
+          Voir tous les projets
+        </a>
+      </div>
 
       <Contact />
     </main>

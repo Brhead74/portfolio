@@ -57,8 +57,8 @@ const MediaPreview = ({ source, alt, className }) => {
   return <img src={source} alt={alt} loading="lazy" className={className} />;
 };
 
-const AsymmetricalGallery = () => {
-  const images = data;
+const AsymmetricalGallery = ({ limit } = {}) => {
+  const images = Number.isInteger(limit) && limit > 0 ? data.slice(0, limit) : data;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -86,13 +86,6 @@ const AsymmetricalGallery = () => {
 
   return (
     <section id="work" className="gallery-section">
-      <div className="gallery-intro">
-        <p className="gallery-kicker">Selected work</p>
-        <h2 className="gallery-title">Mes projets</h2>
-        <p className="gallery-description">
-          Une sélection courte et lisible de travaux 2D, 3D, jeu et interface. Chaque carte reste simple, mais met en avant le contenu.
-        </p>
-      </div>
 
       <div className="gallery-grid focused-primary">
         {(() => {

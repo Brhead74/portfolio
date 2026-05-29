@@ -1,7 +1,7 @@
 export const data = [
     {
-        src: "Magma.png",
-        src2: "public.jpg",
+        src: "public1.png",
+        src2: ["magma.png", "public.jpg"],
         titre: "Alerte Magma",
         details: "Jeu de société Phy-Gital basé sur Fire Tower.",
         stack: ["Unity", "Game design", "Blender", "Experimentation"],
@@ -14,10 +14,18 @@ export const data = [
         stack: ["Unity", "Game design", "VFX"],
     },
     {
+        src: "loop1.png",
+        src2: ["loop2.png","loop3.png"],
+        titre: "Loops and Laps",
+        details: "Gamejam 2025 sur le théme \"loop\"",
+        stack: ["Unity", "UI", "VFX"],
+        link: "https://wannabeez.itch.io/loops-and-laps",
+    },
+    {
         src: "PromInHeaven.png",
         src2: ["PromInHeaven2.png", "PromInHeaven.mp4", "PromInHeavenInterior.mp4"],
         titre: "Promenade dans l'après",
-        details: "Une visite VR de l'après et l'exploration des souvenirs.",
+        details: "Une visite VR de l'après et l'exploration des souvenirs d'un monde vide.",
         stack: ["Unity", "VR", "VFX", "3D", "Experimentation"],
     },
     {

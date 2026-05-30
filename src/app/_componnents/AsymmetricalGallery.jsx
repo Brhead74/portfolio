@@ -1,10 +1,9 @@
 'use client';
-import React, { useState, useEffect, useRef } from "react";
-import Modal from "./Modal";
-import { data } from "./data";
+import React, { useRef, useEffect } from "react";
+import Link from 'next/link';
+import { data } from "../data";
 import "./AsymmetricalGallery.css";
-
-const videoPattern = /\.(mp4|webm|ogg)(\?.*)?$/i;
+import { normalizeSrc, videoPattern, slugify } from './utils';
 
 const MediaPreview = ({ source, alt, className }) => {
   const ref = useRef(null);
@@ -34,11 +33,13 @@ const MediaPreview = ({ source, alt, className }) => {
 
   if (!source) return null;
 
-  if (videoPattern.test(source)) {
+  const src = normalizeSrc(source);
+
+  if (videoPattern.test(src)) {
     return (
       <video
         ref={ref}
-        src={source}
+        src={src}
         className={className}
         loop
         muted
@@ -54,35 +55,13 @@ const MediaPreview = ({ source, alt, className }) => {
     );
   }
 
-  return <img src={source} alt={alt} loading="lazy" className={className} />;
+  return <img src={src} alt={alt} loading="lazy" className={className} />;
 };
+
+ 
 
 const AsymmetricalGallery = ({ limit } = {}) => {
   const images = Number.isInteger(limit) && limit > 0 ? data.slice(0, limit) : data;
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedImage(null);
-  };
-
-  // Handle keyboard escape for modal
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape" && isModalOpen) {
-        closeModal();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isModalOpen]);
 
   return (
     <section id="work" className="gallery-section">
@@ -98,12 +77,7 @@ const AsymmetricalGallery = ({ limit } = {}) => {
             <>
               <div className="gallery-primary" style={{ ['--delay']: `0ms` }}>
                 <div className={`gallery-card gallery-card-large ${((primary.src && primary.src.toLowerCase().includes('horror')) || (primary.titre && primary.titre.toLowerCase().includes('glauque'))) ? 'saturated-card' : ''}`}>
-                  <button
-                    type="button"
-                    className="gallery-card-button"
-                    onClick={() => handleImageClick(primary)}
-                    aria-label={`Open project ${primary.titre || 'featured project'}`}
-                  >
+                  <Link href={`/projects/${slugify(primary.titre || 'featured')}`} className="gallery-card-button" aria-label={`Open project ${primary.titre || 'featured project'}`}>
                     {(() => {
                       const isHorror = (primary.src && primary.src.toLowerCase().includes('horror')) || (primary.titre && primary.titre.toLowerCase().includes('glauque'));
                       return <MediaPreview source={primary.src} alt={primary.titre} className={`gallery-image ${isHorror ? 'saturated' : ''}`} />;
@@ -121,7 +95,7 @@ const AsymmetricalGallery = ({ limit } = {}) => {
                       <h3 className="gallery-card-title">{primary.titre || "Untitled"}</h3>
                       <p className="gallery-card-details">{primary.details}</p>
                     </div>
-                  </button>
+                  </Link>
                 </div>
               </div>
 
@@ -132,12 +106,7 @@ const AsymmetricalGallery = ({ limit } = {}) => {
                     key={`tile-${idx}`}
                     style={{ ['--delay']: `${(idx + 1) * 40}ms` }}
                   >
-                    <button
-                      type="button"
-                      className="gallery-card-button"
-                      onClick={() => handleImageClick(image)}
-                      aria-label={`Open project ${image.titre || ('project ' + (idx + 2))}`}
-                    >
+                    <Link href={`/projects/${slugify(image.titre || ('project-' + (idx + 2)))}`} className="gallery-card-button" aria-label={`Open project ${image.titre || ('project ' + (idx + 2))}`}>
                       <MediaPreview
                         source={image.src}
                         alt={image.titre}
@@ -156,18 +125,14 @@ const AsymmetricalGallery = ({ limit } = {}) => {
                         <h3 className="gallery-card-title">{image.titre || "Untitled"}</h3>
                         <p className="gallery-card-details">{image.details}</p>
                       </div>
-                    </button>
+                    </Link>
                   </div>
                 ))}
               </div>
             </>
           );
         })()}
-
-      {/* Modal */}
-      {isModalOpen && (
-        <Modal selectedImage={selectedImage} closeModal={closeModal} />
-      )}
+      {/* modal removed — projects now open as pages */}
       </div>
     </section>
   );

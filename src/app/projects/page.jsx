@@ -1,5 +1,6 @@
 import AsymmetricalGallery from "../_componnents/AsymmetricalGallery";
 import Breadcrumb from "../_componnents/Breadcrumb";
+
 import "../page.css";
 import "./projects.css";
 

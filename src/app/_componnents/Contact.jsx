@@ -14,11 +14,12 @@ const Contact = () => {
               Contactez-moi
             </a>
             <a
-              href='maxconst_cv.pdf'
+              href='https://drive.google.com/file/d/1LHhnnAPkLyHLLT4CPVDdiTSbexwvX4OU/view?usp=sharing'
               target='_blank'
-              rel='noreferrer'
-              className="button button-secondary">
-              Télécharger mon CV
+              rel='noopener noreferrer'
+              className="button button-secondary"
+              title="Ouvrir le CV dans un nouvel onglet">
+              Voir mon CV
             </a>
           </div>
         </div>

@@ -3,27 +3,33 @@
   z-index: 1000;
 }
 
+@keyframes headerFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .top-bar {
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-  box-shadow: var(--shadow-medium);
+  width: min(100%, 80rem);
+  margin: 0 auto;
+  padding: 1.75rem 0.75rem 1.1rem;
+  border-bottom: 2px solid var(--foreground);
+  background: var(--background);
 }
 
 .brand-block {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.15rem;
+  gap: 0.4rem;
   min-width: 0;
+  opacity: 0;
+  animation: headerFadeUp 600ms cubic-bezier(.22,.9,.28,1) 0ms forwards;
 }
-
-/* brand-logo removed — title now uses site font */
-
 
 .site-title {
   display: inline-flex;
@@ -33,106 +39,86 @@
 }
 
 .site-title-text {
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  font-size: clamp(1.125rem, 2.2vw, 1.6rem);
-  font-weight: 700;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  font-weight: 900;
   line-height: 1;
   color: var(--foreground);
   margin: 0;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   display: inline-block;
   transition: transform 120ms ease, color 120ms ease;
 }
 
 .site-title:hover .site-title-text { transform: translateY(-1px); color: var(--accent-strong); }
 
-.site-title:hover {
-  color: #0f172a;
-}
-
 .site-kicker {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.55rem;
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
 }
 
 .site-kicker::before {
   content: "";
-  width: 2rem;
-  height: 1px;
-  background: linear-gradient(90deg, var(--accent), transparent);
+  width: 1.5rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent-strong);
 }
 
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0;
+  animation: headerFadeUp 600ms cubic-bezier(.22,.9,.28,1) 90ms forwards;
 }
 
 .desktop-nav a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  padding: 0.62rem 0.95rem;
   color: var(--foreground);
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 600;
-  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
-  position: relative;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease;
 }
 
 .desktop-nav a:hover {
-  transform: translateY(-2px);
-  border-color: rgba(15,23,42,0.04);
-  background: linear-gradient(180deg, rgba(248,250,252,0.6), rgba(248,250,252,0.9));
+  border-color: var(--accent-strong);
 }
 
-.desktop-nav a span {
-  color: var(--muted);
-  font-size: 0.7rem;
+.desktop-nav a.nav-cta {
+  background: var(--foreground);
+  color: var(--background);
   font-weight: 700;
-  letter-spacing: 0.14em;
+  padding: 0.6rem 1.15rem;
+  border-radius: var(--radius-pill);
+  border-bottom: none;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
-/* Animated underline */
-.desktop-nav a::after {
-  content: "";
-  position: absolute;
-  left: 12%;
-  right: 12%;
-  bottom: 8px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  opacity: 0;
-  transform: scaleX(0.4);
-  transition: opacity 160ms ease, transform 200ms ease;
+.desktop-nav a.nav-cta:hover {
+  background: var(--accent-strong);
+  border-color: transparent;
+  transform: translateY(-1px);
 }
 
-.desktop-nav a:hover::after,
-.desktop-nav a:focus::after,
-.desktop-nav a[aria-current="page"]::after {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-/* Focus styles for keyboard users */
-.desktop-nav a:focus {
-  outline: none;
-  box-shadow: 0 6px 18px rgba(124,58,237,0.08);
+.mobile-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .hamburger-menu {
   appearance: none;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: var(--surface);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -160,7 +146,7 @@
   width: 100%;
   height: 100vh;
   padding: 0.75rem;
-  background: #f4f7fb;
+  background: var(--background);
   color: var(--foreground);
   display: flex;
   flex-direction: column;
@@ -184,7 +170,7 @@
   padding: 1.25rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: #ffffff;
+  background: var(--surface);
   box-shadow: var(--shadow-strong);
 }
 
@@ -203,9 +189,11 @@
 .screen-title {
   margin: 0;
   color: var(--foreground);
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 3rem);
   line-height: 1;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
 }
 
 .close-button {
@@ -218,7 +206,7 @@
   width: 3rem;
   height: 3rem;
   border-radius: var(--radius-pill);
-  background-color: #f8fafc;
+  background-color: var(--accent-pale);
   border: 1px solid var(--border);
   font-size: 2.5rem;
   color: var(--foreground);
@@ -228,7 +216,7 @@
 
 .close-button:hover {
   transform: scale(1.05);
-  background-color: #eef2f7;
+  background-color: var(--accent);
 }
 
 .menu-content {
@@ -241,17 +229,17 @@
 .menu-column {
   padding: 1.25rem;
   border-radius: var(--radius-md);
-  background: #f8fafc;
+  background: var(--accent-pale);
   border: 1px solid var(--border);
 }
 
 .menu-column h3 {
   margin: 0 0 0.85rem;
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--muted);
+  color: var(--accent-strong);
 }
 
 .menu-column ul {
@@ -271,12 +259,12 @@
   text-decoration: none;
   color: var(--foreground);
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 700;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .menu-column a:hover {
-  opacity: 0.8;
+  opacity: 0.75;
   transform: translateX(0.15rem);
 }
 
@@ -299,68 +287,23 @@
     display: none;
   }
 
-  .site-title {
-    font-size: 1.55rem;
+  .site-title-text {
+    font-size: 1.4rem;
   }
 
   .hamburger-menu .bar {
     width: 1rem;
   }
-
-  .menu-container {
-    background: rgba(16, 24, 40, 0.48);
-    color: #ffffff;
-  }
-
-  .menu-shell {
-    background: #0f172a;
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
-  }
-
-  .menu-kicker,
-  .menu-column h3,
-  .menu-footer {
-    color: rgba(255, 255, 255, 0.76);
-  }
-
-  .screen-title,
-  .menu-column a,
-  .close-button {
-    color: #ffffff;
-  }
-
-  .close-button {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.14);
-  }
-
-  .close-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .menu-column {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.08);
-  }
-
-  .menu-footer {
-    font-size: 0.8rem;
-  }
 }
 
 @media (min-width: 769px) {
-  .hamburger-menu {
+  .mobile-controls {
     display: none;
   }
 
-  .top-bar {
-    padding: 1rem 1.35rem;
-  }
-
-    .menu-shell {
-      padding: 2rem;
-      border-radius: var(--radius-lg);
+  .menu-shell {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
   }
 
   .menu-content {
@@ -370,7 +313,7 @@
 
 @media (max-width: 480px) {
   .top-bar {
-    padding: 0.9rem 1rem;
+    padding: 1.1rem 0.75rem 0.9rem;
   }
 
   .menu-header {

@@ -1,12 +1,15 @@
+'use client';
 import { Instagram, LinkedinIcon } from 'lucide-react';
-import React from 'react';
 import "./Footer.css";
+import { useLocale } from "../i18n/LocaleContext";
 
 const Footer = () => {
+    const { t } = useLocale();
+
     return (
         <footer className="site-footer">
             <div className="site-footer-inner">
-                <p className="site-footer-copy">&copy; {new Date().getFullYear()} Maxime Constantineau. Tous droits réservés.</p>
+                <p className="site-footer-copy">&copy; {new Date().getFullYear()} Maxime Constantineau. {t("footer.rights")}</p>
                 <div className="site-footer-links">
                     <a className="site-footer-link" href="https://www.linkedin.com/in/max-const" target="_blank" rel="noreferrer" aria-label="LinkedIn">
                         <LinkedinIcon size={18} />

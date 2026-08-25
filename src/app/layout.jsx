@@ -1,21 +1,23 @@
-import localFont from "next/font/local";
+import { Archivo, Manrope } from "next/font/google";
 import "./globals.css";
 import Header from "./_componnents/Header";
 import Footer from "./_componnents/Footer";
-import '@fontsource/luckiest-guy';
+import { LocaleProvider } from "./i18n/LocaleContext";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+// Archivo (headings/display) + Manrope (body) — matches the type system
+// used on maxconst_cv.pdf rather than the generic default Geist pairing.
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["500", "700", "800", "900"],
+  variable: "--font-display",
+  display: "swap",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
 });
-
-
 
 export const metadata = {
   title: "Max.C // Portfolio",
@@ -26,11 +28,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${archivo.variable} ${manrope.variable} antialiased`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <noscript>
+          <style>{`.card { opacity: 1 !important; translate: 0 0 !important; }`}</style>
+        </noscript>
+        <LocaleProvider>
+          <Header />
+          {children}
+          <Footer />
+        </LocaleProvider>
       </body>
     </html>
   );

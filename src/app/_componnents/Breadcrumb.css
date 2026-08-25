@@ -1,28 +1,62 @@
 .breadcrumb {
-  margin: 0 0 1rem;
-  padding: 0 1rem;
+  margin: 0 0 1.75rem;
+  padding: 0;
 }
 .breadcrumb-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--muted);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
 }
 .breadcrumb-item a {
   color: var(--muted);
   text-decoration: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-  transition: background 120ms ease;
+  padding: 0;
+  border-radius: 0;
+  transition: color 120ms ease;
 }
-.breadcrumb-item a:hover { background: rgba(2,6,23,0.04); }
-.breadcrumb-sep { margin: 0 0.25rem; color: var(--muted); }
-.breadcrumb-current span { color: var(--foreground); font-weight: 700; }
+.breadcrumb-item a:hover {
+  color: var(--foreground);
+  background: transparent;
+}
+.breadcrumb-sep { margin: 0 0.35rem; color: var(--border); flex: 0 0 auto; font-size: 0.9rem }
+.breadcrumb-current span {
+  color: var(--muted);
+  font-weight: 600;
+  display: inline-block;
+  max-width: 60vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+/* Larger screens: more spacing and no truncation */
 @media (min-width: 768px) {
   .breadcrumb { padding: 0; }
+  .breadcrumb-list { gap: 0.6rem; font-size: 0.95rem }
+  .breadcrumb-current span { max-width: none }
+}
+
+/* very small screens: hide meta and keep only two items */
+@media (max-width: 360px) {
+  .breadcrumb-item:nth-child(3) { display: none }
+}
+
+/* reduce margins/padding on small mobile screens */
+@media (max-width: 480px) {
+  .breadcrumb {
+    margin-bottom: 1.15rem;
+    padding: 0;
+  }
+  .breadcrumb-list { font-size: 0.82rem }
+  .breadcrumb-current span { max-width: 50vw }
 }

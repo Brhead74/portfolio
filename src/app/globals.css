@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #f4f7fb;
-  --foreground: #101828;
-  --muted: #667085;
+  /* palette sampled directly from maxconst_cv.pdf, not a generic SaaS blue */
+  --background: #fdfbee;
+  --foreground: #15181d;
+  --muted: #565c66;
   --surface: #ffffff;
-  --surface-strong: #ffffff;
-  --border: rgba(16, 24, 40, 0.08);
-  --accent: #0ea5e9;
-  --accent-strong: #0284c7;
+  --border: rgba(21, 24, 29, 0.14);
+  --accent: #78cddc;
+  --accent-strong: #0d7a9c;
+  --accent-pale: #e4f4f7;
   /* design tokens for consistent styling */
-  --radius-sm: 0.5rem;
   --radius-md: 1.25rem;
   --radius-lg: 1.75rem;
   --radius-pill: 999px;
@@ -20,7 +20,6 @@
   --shadow-soft: 0 6px 18px rgba(15,23,42,0.06);
   --shadow-medium: 0 14px 34px rgba(15,23,42,0.08);
   --shadow-strong: 0 24px 80px rgba(15,23,42,0.12);
-  --shadow-xstrong: 0 30px 80px rgba(15,23,42,0.22);
 
   --btn-padding-vertical: 0.95rem;
   --btn-padding-horizontal: 1.2rem;
@@ -34,23 +33,96 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   margin: 0;
   color: var(--foreground);
-  background:
-    radial-gradient(circle at top left, rgba(14, 165, 233, 0.14), transparent 32%),
-    radial-gradient(circle at top right, rgba(14, 116, 144, 0.1), transparent 28%),
-    linear-gradient(180deg, #f8fbff 0%, var(--background) 55%, #edf3f8 100%);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
   min-height: 100vh;
 }
 
 ::selection {
-  background: rgba(14, 165, 233, 0.18);
+  background: rgba(120, 205, 220, 0.35);
   color: var(--foreground);
 }
 
 img {
   display: block;
   max-width: 100%;
+}
+
+/* ---------- shared buttons (single source of truth — do not redeclare per-page) ---------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: var(--radius-pill);
+  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.button-primary:hover {
+  background: var(--accent-strong);
+}
+
+.button-secondary {
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: var(--shadow-soft);
+}
+
+.button-secondary:hover {
+  border-color: var(--accent-strong);
+  color: var(--accent-strong);
+}
+
+@media (min-width: 640px) {
+  .button {
+    width: auto;
+  }
+}
+
+/* ---------- shared kicker/eyebrow label (accent-bar + label, matches site-kicker in the header) ---------- */
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.kicker::before {
+  content: "";
+  width: 1.5rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent-strong);
 }

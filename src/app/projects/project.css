@@ -42,11 +42,35 @@
 }
 
 .project-large-image {
-  width: 100%;
+  display: block;
   height: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--accent-pale);
+}
+
+/* First media item reads as the hero shot — full width, a fixed
+   cinematic ratio so it always anchors the column the same way. */
+.project-media-hero {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+/* Everything after the hero wraps into an adaptive row instead of
+   stacking one-per-line — flex-grow lets a lone trailing item fill
+   the full row rather than leaving dead space beside it. */
+.project-media-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.project-media-grid .project-large-image {
+  flex: 1 1 13rem;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 .project-info {

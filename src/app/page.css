@@ -200,6 +200,22 @@
     floatY 5.4s ease-in-out 920ms infinite;
 }
 
+/* Text swap cross-fades via a plain CSS transition (toggled by the
+   .is-fading class) rather than a keyframe — kept on this inner element,
+   separate from the pill's own entrance/float animations above, so the
+   two never fight. */
+.hero-tag-text {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.hero-tag-text.is-fading {
+  opacity: 0;
+  transform: translateY(3px) scale(0.97);
+}
+
 @media (min-width: 640px) {
   .page-shell {
     padding: 0 1.5rem 4rem;
@@ -224,7 +240,8 @@
   .hero-blob,
   .hero-blob-ring,
   .hero-portrait,
-  .hero-tag-float {
+  .hero-tag-float,
+  .hero-tag-text {
     opacity: 1;
     animation: none !important;
   }

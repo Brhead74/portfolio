@@ -28,8 +28,7 @@ export const dictionary = {
           "Je crée des expériences multimédia, de l'identité visuelle au jeu, avec une approche claire, lisible et orientée résultat — du prototype de gamejam au projet d'équipe complet.",
         voirProjets: "Voir les projets",
         meContacter: "Me contacter",
-        tag1: "VR · 3D",
-        tag2: "Game jams",
+        tags: ["VR · 3D", "Game jams", "VFX", "Design de jeu", "Interfaces", "Expérimentation"],
       },
       gallery: {
         kicker: "Travaux sélectionnés",
@@ -97,8 +96,7 @@ export const dictionary = {
           "I build multimedia experiences, from visual identity to games, with a clear, readable, results-oriented approach — from gamejam prototype to full team project.",
         voirProjets: "View projects",
         meContacter: "Contact me",
-        tag1: "VR · 3D",
-        tag2: "Game jams",
+        tags: ["VR · 3D", "Game jams", "VFX", "Game design", "Interfaces", "Experimentation"],
       },
       gallery: {
         kicker: "Selected work",

@@ -8,6 +8,7 @@ const ProjectDetailView = ({ project }) => {
 
     const gather = (v) => (Array.isArray(v) ? v : v ? [v] : []);
     const media = [...gather(project.src), ...gather(project.src2)].map(normalizeSrc).filter(Boolean);
+    const [heroMedia, ...restMedia] = media;
 
     const details = localize(project.details, locale);
     const longDescription = localize(project.longDescription, locale);
@@ -29,13 +30,25 @@ const ProjectDetailView = ({ project }) => {
 
             <section className="project-content">
                 <div className="project-media-column">
-                    {media.map((src, i) => (
-                        videoPattern.test(src) ? (
-                            <video key={i} src={src} controls className="project-large-image" />
+                    {heroMedia && (
+                        videoPattern.test(heroMedia) ? (
+                            <video src={heroMedia} controls className="project-large-image project-media-hero" />
                         ) : (
-                            <img key={i} src={src} alt={`${project.titre} ${i}`} className="project-large-image" />
+                            <img src={heroMedia} alt={`${project.titre} 1`} className="project-large-image project-media-hero" />
                         )
-                    ))}
+                    )}
+
+                    {restMedia.length > 0 && (
+                        <div className="project-media-grid">
+                            {restMedia.map((src, i) => (
+                                videoPattern.test(src) ? (
+                                    <video key={i} src={src} controls className="project-large-image" />
+                                ) : (
+                                    <img key={i} src={src} alt={`${project.titre} ${i + 2}`} className="project-large-image" />
+                                )
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 <aside className="project-info">
